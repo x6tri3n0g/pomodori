@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { QUESTION_STEPS } from "./constants";
 import { QuestionStepType } from "./types";
-import Funnel from "./Funnel";
+import QuestionStep from "./QuestionStep";
 // import { SubmitHandler, useForm } from "react-hook-form";
 
 // interface Inputs {
@@ -21,7 +21,7 @@ const RegisterQuestion = () => {
   //   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
-    <Funnel
+    <QuestionStep
       step={step}
       contents={<div>contents</div>}
       handleClickNext={() => setStep(QUESTION_STEPS.INTRO + 1)}

@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
+import { Title } from "./QuestionContent/Title";
 import { QUESTION_STEPS } from "./constants";
-import { QuestionStepType } from "./types";
-import { convertStepToTitle } from "./FunnelContents";
+import type { QuestionStepType } from "./types";
 
 interface Props {
   step: QuestionStepType;
@@ -9,14 +9,14 @@ interface Props {
   handleClickNext: () => void;
 }
 
-const Funnel = ({ step, contents, handleClickNext }: Props) => {
+const QuestionStep = ({ step, contents, handleClickNext }: Props) => {
   const stepLength = Object.keys(QUESTION_STEPS).length;
 
   return (
-    <div className="flex flex-col p-6">
+    <div className="flex flex-col p-6 bg-white rounded-lg shadow-lg">
       <div className="flex space-between">
-        <h1>{convertStepToTitle(step)}</h1>
-        <span>{`${step} / ${stepLength}`}</span>
+        <Title step={step} />
+        <span className="w-[100px] text-black-500">{`${step} / ${stepLength}`}</span>
       </div>
       {contents}
       <footer className="flex flex-end">
@@ -28,4 +28,4 @@ const Funnel = ({ step, contents, handleClickNext }: Props) => {
   );
 };
 
-export default Funnel;
+export default QuestionStep;
