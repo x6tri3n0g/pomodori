@@ -1,7 +1,11 @@
-import { useState } from "react";
-import { QUESTION_STEPS } from "./constants";
-import { QuestionStepType } from "./types";
-import QuestionStep from "./QuestionStep";
+import { useMemo, useState } from "react";
+import {
+  CONTENT_BY_STEP,
+  QUESTION_STEP_LIST,
+  QUESTION_STEPS,
+} from "./constants";
+import { Title } from "./QuestionContent/Title";
+import QuestionContentFooter from "./QuestionContent/Footer";
 // import { SubmitHandler, useForm } from "react-hook-form";
 
 // interface Inputs {
@@ -10,7 +14,15 @@ import QuestionStep from "./QuestionStep";
 // }
 
 const RegisterQuestion = () => {
-  const [step, setStep] = useState<QuestionStepType>(QUESTION_STEPS.INTRO);
+  const [stepIndex, setStepIndex] = useState<number>(0);
+
+  const currentStep = QUESTION_STEP_LIST[stepIndex];
+  const currentContent = useMemo(
+    () =>
+      CONTENT_BY_STEP[currentStep] ?? CONTENT_BY_STEP[QUESTION_STEPS.FINISH],
+    [currentStep]
+  );
+  const stepLength = Object.keys(QUESTION_STEPS).length;
   //   const {
   //     register,
   //     handleSubmit,
@@ -21,11 +33,16 @@ const RegisterQuestion = () => {
   //   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
   return (
-    <QuestionStep
-      step={step}
-      contents={<div>contents</div>}
-      handleClickNext={() => setStep(QUESTION_STEPS.INTRO + 1)}
-    />
+    <div className="flex flex-col flex-1 space-between p-6">
+      <div className="flex space-between w-full">
+        <Title text={currentContent.title} />
+        <span className="shrink-[50px] text-gray-500">{`${stepIndex} / ${stepLength}`}</span>
+      </div>
+      <div className="flex flex-1 shrink-0">contents</div>
+      <QuestionContentFooter
+        handleNext={() => setStepIndex((prev) => prev + 1)}
+      />
+    </div>
   );
 };
 
