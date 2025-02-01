@@ -38,7 +38,7 @@ const RegisterQuestion = () => {
         <Title text={currentContent.title} />
         <span className="shrink-[50px] text-gray-500">{`${stepIndex} / ${stepLength}`}</span>
       </div>
-      <div className="flex flex-1 shrink-0">contents</div>
+      <div className="flex flex-1 shrink-0">there is content</div>
       <QuestionContentFooter
         handleNext={() => setStepIndex((prev) => prev + 1)}
       />
